@@ -1,34 +1,39 @@
-
-## Title
-
-An Analysis of DNA Methylation Data in the TCGA-BRCA Study Using the Illumina Infinium HumanMethylation27 BeadArray
+# Differential DNA Methylation in TCGA Breast Cancer Data
 
 ## Overview
+This project analyzes DNA methylation differences between tumor and matched normal tissue
+in a cohort of 27 patients from the TCGA-BRCA study. A paired case–control design is used
+to enable within-individual comparisons across approximately 24,000 CpG sites.
 
-The objective of our analysis was to determine DNA methylation patterns between tumor tissue and normal tissue in a cohort of 27 patients from the TCGA-BRCA study, which used a paired case-control design that allowed us to compare the two types of tissue in the same individuals.
+The analysis focuses on identifying systematic methylation changes associated with tumor
+status while accounting for the high-dimensional nature of the data.
 
 ## Data
-- Source: The Cancer Genome Atlas (TCGA)
-- Size: 27 patients, ~24,000 CpG sites
-- Key variables: Beta values for tumor and non-tumor tissue ($0 \leq \beta \leq 1$)
+- **Source:** The Cancer Genome Atlas (TCGA-BRCA)
+- **Sample size:** 27 patients with matched tumor and normal tissue
+- **Features:** ~24,000 CpG sites
+- **Measurement:** Beta values representing methylation proportion (0–1)
 
 ## Methods
-- Used Bioconductor package in R to obtain data
-- EDA: Volcano plot, principal component analysis (PCA)
-- Primary analysis: elastic net regression
+- Data access and preprocessing using Bioconductor tools in R
+- Exploratory data analysis using principal component analysis (PCA) and volcano plots
+- Penalized regression (elastic net) to identify CpG sites associated with tumor status
+- False discovery rate (FDR) correction for multiple hypothesis testing
 
 ## Results
-- PCA showed clear separation between normal and tumor tissue
-- Even after adjusting for multiple comparisons via FDR, over 600 sites were either hyper- or hypomethylated in tumor tissue
-- No clear associations between hyper- and hypo-methylation in tumor tissue and location in the human genome
-- For plots, see the complete PDF
+- PCA revealed clear separation between tumor and normal tissue samples
+- After FDR adjustment, over 600 CpG sites exhibited significant hyper- or hypomethylation
+  in tumor tissue
+- No strong relationship was observed between differential methylation and genomic location
 
-## Limitations / Next Steps
-- Only used ~0.1% of CpG sites in the entire human genome 
-- Need to test external validity of model and whether it effectively generalizes to larger patient samples
-- Future analysis could be done consolidating CpG sites into sets based on location
+Selected visualizations are available in the accompanying PDF report.
 
-## How to Reproduce
-- Download the Bioconductor package in R
-- Use the GDCquery function (in the RMD file) to obtain and preprocess data
-- Once data has been preprocessed, run the analysis code in the RMD file
+## Limitations and Future Work
+- Analysis is limited to a subset (~0.1%) of CpG sites measured by the array platform
+- Model generalizability should be evaluated using larger and independent patient cohorts
+- Future work could aggregate CpG sites into biologically meaningful genomic regions
+
+## Reproducibility
+All analyses were conducted in R. The R Markdown file contains code to download,
+preprocess, and analyze the data using Bioconductor and standard statistical packages.
+
